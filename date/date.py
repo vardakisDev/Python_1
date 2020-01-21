@@ -17,11 +17,11 @@ def yearisleap(x):
 
 def rangeofmonths(month, year):
     if yearisleap(int(year)) and month == '02':
-        print('The month from the selected date has : 28 days ')
+        print('The month from the selected date has : 29 days ')
     else: print('The month from the selected date has : ' ,months[month],'days')
 
 
-search = input('Enter End date in the format m/d/y: ')
+search = input('Enter End date in the format dd/mm/yy: ')
 
 now = datetime.datetime.now()
 time = now.strftime('%X')
@@ -32,8 +32,9 @@ data = datetime.datetime.strptime(newdate , '%m/%d/%Y%H:%M:%S')
 diff =  data - now
 print('The difference from the current date and the date you gave is : ' ,diff)
 
-m = now.strftime('%m')
-y = now.strftime('%y')
+m = data.strftime('%m')
+print(m)
+y = data.strftime('%y')
 rangeofmonths(m,y)
 
 
