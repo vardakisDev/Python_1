@@ -7,51 +7,49 @@ from operator import itemgetter
 from collections import Counter
 import numpy 
 
-#Ελέγχει αν όλα είναι τα ίδια
-# def Five_of_a_Kind(h):
-# 	kinds=[c[0] for c in h]
-# 	kinds=list(set(kinds))
-# 	if len(kinds)==1:
-# 		return kinds[0]
-# 	else:
-# 		return 0
+def Play(hand):
+	print('Sorting your hand .....')
+	hand = list((int(x[0]) ,x[1]) for x in hand)
+	hand.sort()
+	print('Your hand is:')
+	kinds=[c[1] for c in hand]
+	Five_of_a_Kind(kinds,hand)
 
-def Five_of_a_Kind(kind,hand):
-	
+def Five_of_a_Kind(kinds,hand):
 	kind=list(set(kinds))
 	if(len(kinds)) == 1:
-		return kinds[0] , 'five of a kind'
+		print('five of a kind')
 	else:
-		return 0
+		Four_of_a_Kind(kind,hand)
 
 def	Four_of_a_Kind(kind,hand):
 	counter = Counter(kind)
 	most_occur =counter.most_common(1)
 	if(most_occur[0][1] == 4):
-		return most_occur[0][0] , ' four of a kind'
+		print(most_occur[0][0] , ' four of a kind')
 	else:
-		return 0
+		Three_of_a_Kind(kind,hand)
 
 
 def	Three_of_a_Kind(kind,hand):
 	counter = Counter(kind)
 	most_occur =counter.most_common(1)
 	if(most_occur[0][1] == 3):
-		return most_occur[0][0] , ' three of a kind'
-	else:  return 0 
-
+		print(most_occur[0][0] , ' three of a kind')
+	else:
+		numbers=[c[0] for c in hand]
+		Full_House(kind, hand , numbers)
 
 def Full_House(kind, hand , number):
 	count_number = Counter(number)
 	most_number = count_number.most_common(2)
 	if(most_number[0][1]==3) and most_number[1][1]==2:
-			return most_number , 'full house'
-		# else if we have three of a kind rule
+			print(most_number , 'full house')
 	elif most_number[0][1]==2 and most_number[1][1]==2:
-			 return most_number , 'pair of two'
+			 print(most_number , 'pair of two')
 	elif most_number[0][1]==2:
-			return most_number ,  'pair'
-	else: return 0
+			print(most_number[0] ,  'pair')
+	else: Straight(kind,hand,number)
 
 def Straight(kind,hand,number):
 	number.sort()
@@ -66,15 +64,13 @@ def Straight(kind,hand,number):
 			if diff[i] == 0:
 				isPair += 1
 	if StraightFlash == 4 and   most_occur[0][1]==5:
-		return 'straight flush'
+		print('straight flush')
 	elif most_occur[0][1]==5:
-		return 'flush'
+		print('flush')
 	else:
-		return 0
+		HighCard(hand)
 def HighCard(hand):
-	return hand[4][0]
-		# if every number is diff by one then its a straight flash
-
+	print('\nHigh Card',hand[4] )
 def printhand(hand):
 	print('1th |','2th |','3th |','4th |','5th  ')
 	for i in range(0,len(hand)):
@@ -113,9 +109,6 @@ for i in range(1,6):
 # print("Τα χαρτιά σου είναι: ")
 printhand(user_hand)
 
-#by the rules betting occurs we are not ask to implement this might add latter 
-
-
 #the player is asked if he wants to drop cards and then get back as many cards as he threw 
 cards2change = input("Would you like to discard some of your cards  ? If so which , note that you can only discard up to 3 cards:")
 if cards2change!='0':
@@ -128,21 +121,6 @@ if cards2change!='0':
 			user_hand.pop(crd-1)
 		for i in range(len(cards2change)):
 			user_hand+=[deck.pop()]
-#betting again
-# convert the string numbers to ints to do some comprisons
-print('Sorting your hand .....')
-hand = list((int(x[0]) ,x[1]) for x in user_hand)
-hand.sort()
-print('Your hand is:')
-printhand(hand)
+Play(user_hand)
+Play(comp_hand)
 
-kinds=[c[1] for c in hand]
-numbers=[c[0] for c in hand]
-
-print(Five_of_a_Kind(kinds,hand))
-print(Four_of_a_Kind(kinds,hand))
-print(Full_House(kinds,hand,numbers))
-print(Straight(kinds,hand, numbers))
-print(HighCard(hand))
-printhand(hand)
-#fuctions comparing cards take place
