@@ -27,7 +27,7 @@ now = datetime.datetime.now()
 time = now.strftime('%X')
 
 newdate = search + time
-data = datetime.datetime.strptime(newdate , '%m/%d/%Y%H:%M:%S')
+data = datetime.datetime.strptime(newdate , '%d/%m/%Y%H:%M:%S')
 
 diff =  data - now
 print('The difference from the current date and the date you gave is : ' ,diff)
