@@ -74,14 +74,13 @@ def HighCard(hand):
 def printhand(hand):
 	print('1th |','2th |','3th |','4th |','5th  ')
 	for i in range(0,len(hand)):
-		if hand[i][0] == 14:
-			print()
+		if hand[i][0] == '14':
 			print('A',hand[i][1],end="   ")
-		elif hand[i][0] == 13:
+		elif hand[i][0] == '13':
 			print('K',hand[i][1],end="   ")
-		elif hand[i][0] == 12:
+		elif hand[i][0] == '12':
 			print('Q',hand[i][1],end="   ")
-		elif hand[i][0] == 11:
+		elif hand[i][0] == '11':
 			print('J',hand[i][1],end="   ")
 		else:
 			if i==4:
@@ -120,6 +119,8 @@ if cards2change!='0':
 			user_hand.pop(crd-1)
 		for i in range(len(cards2change)):
 			user_hand+=[deck.pop()]
+		print('Your new hand is \n')
+		printhand(user_hand)
 Play(user_hand)
 Play(comp_hand)
 
