@@ -108,7 +108,6 @@ for i in range(1,6):
 	comp_hand+=[deck.pop()]
 # print("Τα χαρτιά σου είναι: ")
 printhand(user_hand)
-print("git test")
 #the player is asked if he wants to drop cards and then get back as many cards as he threw 
 cards2change = input("Would you like to discard some of your cards  ? If so which , note that you can only discard up to 3 cards:")
 if cards2change!='0':
