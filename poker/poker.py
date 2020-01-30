@@ -51,7 +51,7 @@ def Straight(kind,hand,number):
 
 	#if the list is [1,1,1,13] it means that the ace has to play the role of 1 in a straight for example the sorted hand is 2 ,3 , 4 , A(14)
 	#  then the ace is supposed to be 1  and we will have a straight 
-	if diff[3]==13:
+	if diff[3]==9:
 		AceIsOne= 1
 	counter = Counter(kind)
 
@@ -63,8 +63,9 @@ def Straight(kind,hand,number):
 			StraightFlush+=diff[i]
 	#StraightFlush is the sum of the list of differnce , if it's =4 then all the cards are different by 1 
 	# thereforth its a straight and if most occur = 5 then its a staight flush if not its a flush
-	if StraightFlush ==4:
-		if hand[4][0]== '14' and hand[3][0]== '13'  and most_occur[0][1]==5:
+	print(StraightFlush)
+	if StraightFlush == 4:
+		if AceIsOne==0 and most_occur[0][1]==5:
 			print('Royal Flush or Exodia')
 			return
 		elif most_occur[0][1]==5:
@@ -73,8 +74,7 @@ def Straight(kind,hand,number):
 		else:
 			print('Straight')
 			return
-	#else if it's just the kind that the same you have a Flush
-	elif AceIsOne==1 :
+	elif StraightFlush == 12 and AceIsOne ==1:
 		if most_occur[0][1]==5:
 			print('Straight Flush')
 			return
@@ -150,8 +150,8 @@ if cards2change!='0':
 			user_hand+=[deck.pop()]
 		print('Your new hand is \n')
 		printhand(user_hand)
+print(user_hand)
 print('Your hand is:')
 Play(user_hand)
 print("Comouter's hand is:")
 Play(comp_hand)
-

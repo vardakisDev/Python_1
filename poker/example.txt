@@ -36,3 +36,18 @@ Your hand is:
 Straight
 Comouter's hand is:
 High Card  K
+
+
+#example hands to try all the rules
+                                                    Rare hands
+Straight but with an ace
+StraightAce = [('2', 'C'), ('3', 'C'), ('4', 'H'), ('5', 'C'), ('14', 'C')]
+Play(StraightAce)
+
+Flush 
+StraightAce = [('2', 'C'), ('5', 'C'), ('10', 'C'), ('11', 'C'), ('14', 'C')]
+Play(StraightAce)
+
+Roya Flush
+Royal_flush = [('10', 'C'), ('11', 'C'), ('12', 'C'), ('13', 'C'), ('14', 'C')] 
+Play(royal_flush)
