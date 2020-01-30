@@ -12,35 +12,22 @@ def Play(hand):
 	hand.sort()
 
 	kinds=[c[1] for c in hand]
-	Five_of_a_Kind(kinds,hand)
+	isKind(kinds,hand)
 
-
-def Five_of_a_Kind(kinds,hand):
-	kind=list(set(kinds))
-	if(len(kinds)) == 1:
-		print('five of a kind')
-	else:
-		Four_of_a_Kind(kind,hand)
-
-def	Four_of_a_Kind(kind,hand):
-	counter = Counter(kind)
-	most_occur =counter.most_common(1)
-	if(most_occur[0][1] == 4):
-		print(most_occur[0][0] , ' four of a kind')
-	else:
-		Three_of_a_Kind(kind,hand)
-
-
-def	Three_of_a_Kind(kind,hand):
-	counter = Counter(kind)
-	most_occur =counter.most_common(1)
-	if(most_occur[0][1] == 3):
-		print(most_occur[0][0] , ' three of a kind')
-		return
-	else:
+def	isKind(kind,hand):
 		#numbers is all the values of a the cards for example if cards are 4 H , 8 C ---> number=[4,8]
 		numbers=[c[0] for c in hand]
-		Full_House(kind, hand , numbers)
+		count_number = Counter(numbers)
+		most_number = count_number.most_common(1)
+		if most_number[0][1]==5:
+			print(most_number,'Five of a kind')
+		elif most_number[0][1]==4:
+			print(most_number,'Four of a kind')
+		elif most_number[0][1]==3:
+			print(most_number,'Three of a kind')
+			return
+		else:
+			Full_House(kind, hand , numbers)
 
 def Full_House(kind, hand , number):
 	count_number = Counter(number)
