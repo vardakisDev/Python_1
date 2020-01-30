@@ -59,12 +59,6 @@ def  watch_traffic(a , b ,c ):
         flow(a,b,c)
         i +=1
 
-
-
-
-
-
-  
 light1 = Light("Light1" , random.randint(10,20) ,"red")
 light2 = Light("Light2" , random.randint(10,20) , "red")
 light3 = Light("Light3" , random.randint(10,20) , "red")

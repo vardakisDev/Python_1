@@ -27,3 +27,12 @@ Sorting your hand .....
 Your hand is:
 
 High Card (13, 'D')
+
+#example of Straight
+
+1th | 2th | 3th | 4th | 5th
+K S   9 D   Q D   10 S   J D   Would you like to discard some of your cards  ? If so which , note that you can only discard up to 3 cards:0
+Your hand is:
+Straight
+Comouter's hand is:
+High Card  K

@@ -8,12 +8,12 @@ from collections import Counter
 import numpy 
 
 def Play(hand):
-	print('Sorting your hand .....')
 	hand = list((int(x[0]) ,x[1]) for x in hand)
 	hand.sort()
-	print('Your hand is:')
+
 	kinds=[c[1] for c in hand]
 	Five_of_a_Kind(kinds,hand)
+
 
 def Five_of_a_Kind(kinds,hand):
 	kind=list(set(kinds))
@@ -36,7 +36,9 @@ def	Three_of_a_Kind(kind,hand):
 	most_occur =counter.most_common(1)
 	if(most_occur[0][1] == 3):
 		print(most_occur[0][0] , ' three of a kind')
+		return
 	else:
+		#numbers is all the values of a the cards for example if cards are 4 H , 8 C ---> number=[4,8]
 		numbers=[c[0] for c in hand]
 		Full_House(kind, hand , numbers)
 
@@ -45,32 +47,72 @@ def Full_House(kind, hand , number):
 	most_number = count_number.most_common(2)
 	if(most_number[0][1]==3) and most_number[1][1]==2:
 			print(most_number , 'full house')
+			return
 	elif most_number[0][1]==2 and most_number[1][1]==2:
 			 print(most_number , 'pair of two')
+			 return
 	elif most_number[0][1]==2:
 			print(most_number[0] ,  'pair')
+			return
 	else: Straight(kind,hand,number)
 
 def Straight(kind,hand,number):
 	number.sort()
+	AceIsOne = 0
+	#diff gives back all the remaing when whe reduce the list of numbers for example if number = [ 4, 6 , 10] --->>> diff = [ 2,4]
 	diff =list(numpy.diff(number))
+
+	#if the list is [1,1,1,13] it means that the ace has to play the role of 1 in a straight for example the sorted hand is 2 ,3 , 4 , A(14)
+	#  then the ace is supposed to be 1  and we will have a straight 
+	if diff[3]==13:
+		AceIsOne= 1
 	counter = Counter(kind)
+
+	#most_occur gives as the mostt occur kind in the foramt of a list ->>>  [('C', 1)]
 	most_occur =counter.most_common(1)
-	StraightFlash = 0
-	isPair = 0 
+	StraightFlush = 0
 	for i in range(0,len(diff)):
 		# if some numberr in the list is 0 then it isnt a straight 
-			StraightFlash+=diff[i]
-			if diff[i] == 0:
-				isPair += 1
-	if StraightFlash == 4 and   most_occur[0][1]==5:
-		print('straight flush')
+			StraightFlush+=diff[i]
+	#StraightFlush is the sum of the list of differnce , if it's =4 then all the cards are different by 1 
+	# thereforth its a straight and if most occur = 5 then its a staight flush if not its a flush
+	if StraightFlush ==4:
+		if hand[4][0]== '14' and hand[3][0]== '13'  and most_occur[0][1]==5:
+			print('Royal Flush or Exodia')
+			return
+		elif most_occur[0][1]==5:
+			print('Straight Flush')
+			return
+		else:
+			print('Straight')
+			return
+	#else if it's just the kind that the same you have a Flush
+	elif AceIsOne==1 :
+		if most_occur[0][1]==5:
+			print('Straight Flush')
+			return
+		else:
+			print('Straight')
 	elif most_occur[0][1]==5:
-		print('flush')
+		print('Flush')
+		return
 	else:
 		HighCard(hand)
+
+
 def HighCard(hand):
-	print('\nHigh Card',hand[4] )
+		if hand[4][0] == 14:
+			print('High Card  A')
+		elif hand[4][0] == 13:
+			print('High Card  K')
+		elif hand[4][0] ==12:
+			print('High Card  Q')
+		elif hand[4][0] == 11:
+			print('High Card  J')
+		else:
+			print('High Card  ' ,hand[4][0])
+
+
 def printhand(hand):
 	print('1th |','2th |','3th |','4th |','5th  ')
 	for i in range(0,len(hand)):
@@ -121,6 +163,8 @@ if cards2change!='0':
 			user_hand+=[deck.pop()]
 		print('Your new hand is \n')
 		printhand(user_hand)
+print('Your hand is:')
 Play(user_hand)
+print("Comouter's hand is:")
 Play(comp_hand)
 
