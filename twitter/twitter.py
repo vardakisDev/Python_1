@@ -30,7 +30,6 @@ for tweet in user2_tweets:
     counting = list(filter(None,counting))
     sum2 = sum2 + len(counting)
 
-#
 if sum1>sum2 : 
     print("The user1 has in his latest 50 tweets a summary of :" ,sum1,"words")
 else:
