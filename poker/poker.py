@@ -21,8 +21,10 @@ def	isKind(kind,hand):
 		most_number = count_number.most_common(1)
 		if most_number[0][1]==5:
 			print(most_number,'Five of a kind')
+			return
 		elif most_number[0][1]==4:
 			print(most_number,'Four of a kind')
+			return
 		elif most_number[0][1]==3:
 			print(most_number,'Three of a kind')
 			return
@@ -50,7 +52,7 @@ def Straight(kind,hand,number):
 	diff =list(numpy.diff(number))
 
 	#if the list is [1,1,1,13] it means that the ace has to play the role of 1 in a straight for example the sorted hand is 2 ,3 , 4 , A(14)
-	#  then the ace is supposed to be 1  and we will have a straight 
+	# then the ace is supposed to be 1  and we will have a straight 
 	if diff[3]==9:
 		AceIsOne= 1
 	counter = Counter(kind)
