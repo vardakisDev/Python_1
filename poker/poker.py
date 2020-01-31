@@ -63,7 +63,6 @@ def Straight(kind,hand,number):
 			StraightFlush+=diff[i]
 	#StraightFlush is the sum of the list of differnce , if it's =4 then all the cards are different by 1 
 	# thereforth its a straight and if most occur = 5 then its a staight flush if not its a flush
-	print(StraightFlush)
 	if StraightFlush == 4:
 		if AceIsOne==0 and most_occur[0][1]==5:
 			print('Royal Flush or Exodia')
