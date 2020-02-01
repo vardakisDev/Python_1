@@ -4,7 +4,7 @@ import re
 def SumTweets(tweets):
     total =0
     # we  remove the specail chars like @ ! and then with the fiter(None) we remove the "" strings from the list so our count doesnt count them
-    for tweet in user2_tweets:
+    for tweet in tweets:
         counting = re.split(r'[^\w]' , tweet.full_text)
         counting = list(filter(None,counting))
         total = total + len(counting)
