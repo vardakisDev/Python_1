@@ -14,6 +14,23 @@ def Play(hand):
 	kinds=[c[1] for c in hand]
 	isKind(kinds,hand)
 
+def PrintHand(hand):
+	print('1th |','2th |','3th |','4th |','5th  ')
+	for i in range(0,len(hand)):
+		if hand[i][0] == '14':
+			print('A',hand[i][1],end="   ")
+		elif hand[i][0] == '13':
+			print('K',hand[i][1],end="   ")
+		elif hand[i][0] == '12':
+			print('Q',hand[i][1],end="   ")
+		elif hand[i][0] == '11':
+			print('J',hand[i][1],end="   ")
+		else:
+			if i==4:
+				print(hand[i][0],hand[i][1])
+			else:
+				print(hand[i][0],hand[i][1],end="   ")
+
 def	isKind(kind,hand):
 		#numbers is all the values of a the cards for example if cards are 4 H , 8 C ---> number=[4,8]
 		numbers=[c[0] for c in hand]
@@ -101,23 +118,6 @@ def HighCard(hand):
 			print('High Card  ' ,hand[4][0])
 
 
-def printhand(hand):
-	print('1th |','2th |','3th |','4th |','5th  ')
-	for i in range(0,len(hand)):
-		if hand[i][0] == '14':
-			print('A',hand[i][1],end="   ")
-		elif hand[i][0] == '13':
-			print('K',hand[i][1],end="   ")
-		elif hand[i][0] == '12':
-			print('Q',hand[i][1],end="   ")
-		elif hand[i][0] == '11':
-			print('J',hand[i][1],end="   ")
-		else:
-			if i==4:
-				print(hand[i][0],hand[i][1])
-			else:
-				print(hand[i][0],hand[i][1],end="   ")
-
 #Για να μη γράφουμε τα χαρτιά ας 
 #φτιάξουμε την τράπουλα προγραμματιστικά
 cards=[str(i) for i in range(1,14)] 
@@ -136,7 +136,7 @@ for i in range(1,6):
 	user_hand+=[deck.pop()]
 	comp_hand+=[deck.pop()]
 # print("Τα χαρτιά σου είναι: ")
-printhand(user_hand)
+PrintHand(user_hand)
 #the player is asked if he wants to drop cards and then get back as many cards as he threw 
 cards2change = input("Would you like to discard some of your cards  ? If so which , note that you can only discard up to 3 cards:")
 if cards2change!='0':
@@ -150,7 +150,7 @@ if cards2change!='0':
 		for i in range(len(cards2change)):
 			user_hand+=[deck.pop()]
 		print('Your new hand is \n')
-		printhand(user_hand)
+		PrintHand(user_hand)
 print(user_hand)
 print('Your hand is:')
 Play(user_hand)
