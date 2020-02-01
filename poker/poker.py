@@ -7,6 +7,45 @@ from operator import itemgetter
 from collections import Counter
 import numpy 
 
+
+
+
+def Deck():
+	#Για να μη γράφουμε τα χαρτιά ας 
+	#φτιάξουμε την τράπουλα προγραμματιστικά
+	cards=[str(i) for i in range(1,14)] 
+	# cards+=["J","Q","K", "A"] #πρόσθεσε τις φιγούρες
+	suits=["S","H","D","C"] #βάλε τα χρώματα
+	deck=itertools.product(cards,suits) #Φτιάξε όλα τα φύλλα
+	deck=list(deck) #Ας τα έχω σε μία λίστα...
+	#Ας βάλουμε 2 τράπουλες
+	deck+=deck
+	#Ανακάτωσε την τράπουλα
+	random.shuffle(deck)
+	return deck
+
+def Give_cards(deck):
+	hand=[]
+	for i in range(1,6):
+		hand+=[deck.pop()]
+	return hand
+
+def Discard(hand):
+	cards2change = input("Would you like to discard some of your cards  ? If so which , note that you can only discard up to 3 cards:")
+	if cards2change!='0':
+		cards2change.strip()
+		cards2change.split()
+		cards2change = [int(i) for i in cards2change.split(',')]
+		cards2change.sort(reverse=True)
+		if len(cards2change)>0:
+			for crd in cards2change:
+				hand.pop(crd-1)
+			for i in range(len(cards2change)):
+				hand+=[deck.pop()]
+			print('Your new hand is \n')
+			PrintHand(hand)
+	return hand
+
 def Play(hand):
 	hand = list((int(x[0]) ,x[1]) for x in hand)
 	hand.sort()
@@ -118,41 +157,17 @@ def HighCard(hand):
 			print('High Card  ' ,hand[4][0])
 
 
-#Για να μη γράφουμε τα χαρτιά ας 
-#φτιάξουμε την τράπουλα προγραμματιστικά
-cards=[str(i) for i in range(1,14)] 
-# cards+=["J","Q","K", "A"] #πρόσθεσε τις φιγούρες
-suits=["S","H","D","C"] #βάλε τα χρώματα
-deck=itertools.product(cards,suits) #Φτιάξε όλα τα φύλλα
-deck=list(deck) #Ας τα έχω σε μία λίστα...
-#Ας βάλουμε 2 τράπουλες
-deck+=deck
-#Ανακάτωσε την τράπουλα
-random.shuffle(deck)
-user_hand=[]
-comp_hand=[]
-#Μοίρασε τα χαρτιά
-for i in range(1,6):
-	user_hand+=[deck.pop()]
-	comp_hand+=[deck.pop()]
-# print("Τα χαρτιά σου είναι: ")
+
+deck = Deck()
+
+user_hand = Give_cards(deck)
+comp_hand = Give_cards(deck)
+
 PrintHand(user_hand)
-#the player is asked if he wants to drop cards and then get back as many cards as he threw 
-cards2change = input("Would you like to discard some of your cards  ? If so which , note that you can only discard up to 3 cards:")
-if cards2change!='0':
-	cards2change.strip()
-	cards2change.split()
-	cards2change = [int(i) for i in cards2change.split(',')]
-	cards2change.sort(reverse=True)
-	if len(cards2change)>0:
-		for crd in cards2change:
-			user_hand.pop(crd-1)
-		for i in range(len(cards2change)):
-			user_hand+=[deck.pop()]
-		print('Your new hand is \n')
-		PrintHand(user_hand)
-print(user_hand)
+user_hand = Discard(user_hand)
+
 print('Your hand is:')
 Play(user_hand)
+
 print("Comouter's hand is:")
 Play(comp_hand)
