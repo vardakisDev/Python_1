@@ -8,8 +8,6 @@ from collections import Counter
 import numpy 
 
 
-
-
 def Deck():
 	#Για να μη γράφουμε τα χαρτιά ας 
 	#φτιάξουμε την τράπουλα προγραμματιστικά
@@ -57,18 +55,46 @@ def PrintHand(hand):
 	print('1th |','2th |','3th |','4th |','5th  ')
 	for i in range(0,len(hand)):
 		if hand[i][0] == '14':
-			print('A',hand[i][1],end="   ")
+			print(DisplayCard(hand[i][0]),DisplaySuit(hand[i][1]),end="   ")
 		elif hand[i][0] == '13':
-			print('K',hand[i][1],end="   ")
+			print(DisplayCard(hand[i][0]),DisplaySuit(hand[i][1]),end="   ")
 		elif hand[i][0] == '12':
-			print('Q',hand[i][1],end="   ")
+			print(DisplayCard(hand[i][0]),DisplaySuit(hand[i][1]),end="   ")
 		elif hand[i][0] == '11':
-			print('J',hand[i][1],end="   ")
+			print(DisplayCard(hand[i][0]),DisplaySuit(hand[i][1]),end="   ")
 		else:
 			if i==4:
-				print(hand[i][0],hand[i][1])
+				print(hand[i][0],DisplaySuit(hand[i][1]))
 			else:
-				print(hand[i][0],hand[i][1],end="   ")
+				print(hand[i][0],DisplaySuit(hand[i][1]),end="   ")
+
+def DisplayCard(hand):
+
+		hand =str(hand)
+		if hand== '14':
+			return 'A'
+		elif hand == '13':
+			return 'K'
+		elif hand== '12':
+			return 'Q'
+		elif hand== '11':
+			return 'J'
+		else:
+			return hand
+
+
+
+def DisplaySuit(hand):
+		if hand=="C":
+			return  '\u2663'
+		elif hand=="D":
+			return  '\u2666'
+		elif hand=="S":
+			return  '\u2660'
+		elif hand=="H":
+			return  '\u2665'
+	
+			
 
 def	isKind(kind,hand):
 		#numbers is all the values of a the cards for example if cards are 4 H , 8 C ---> number=[4,8]
@@ -76,13 +102,13 @@ def	isKind(kind,hand):
 		count_number = Counter(numbers)
 		most_number = count_number.most_common(1)
 		if most_number[0][1]==5:
-			print(most_number,'Five of a kind')
+			print(DisplayCard('Five of a kind',most_number[0][0]))
 			return
 		elif most_number[0][1]==4:
-			print(most_number,'Four of a kind')
+			print(DisplayCard('Four of a kind' ,most_number[0][0]))
 			return
 		elif most_number[0][1]==3:
-			print(most_number,'Three of a kind')
+			print('Three of a kind' ,DisplayCard(most_number[0][0]))
 			return
 		else:
 			Full_House(kind, hand , numbers)
@@ -91,13 +117,13 @@ def Full_House(kind, hand , number):
 	count_number = Counter(number)
 	most_number = count_number.most_common(2)
 	if(most_number[0][1]==3) and most_number[1][1]==2:
-			print(most_number , 'full house')
+			print('Full House of: ' ,DisplayCard(most_number[0][0] ) , DisplayCard(most_number[1][0]))
 			return
 	elif most_number[0][1]==2 and most_number[1][1]==2:
-			 print(most_number , 'pair of two')
+			 print('Pair of two :',DisplayCard(most_number[0][0]) , DisplayCard(most_number[1][0]))
 			 return
 	elif most_number[0][1]==2:
-			print(most_number[0] ,  'pair')
+			print('Pair of :',DisplayCard(most_number[0][0]))
 			return
 	else: Straight(kind,hand,number)
 
@@ -171,3 +197,6 @@ Play(user_hand)
 
 print("Comouter's hand is:")
 Play(comp_hand)
+
+
+
