@@ -102,10 +102,10 @@ def	isKind(kind,hand):
 		count_number = Counter(numbers)
 		most_number = count_number.most_common(1)
 		if most_number[0][1]==5:
-			print(DisplayCard('Five of a kind',most_number[0][0]))
+			print('Five of a kind',DisplayCard(most_number[0][0]))
 			return
 		elif most_number[0][1]==4:
-			print(DisplayCard('Four of a kind' ,most_number[0][0]))
+			print('Four of a kind' ,DisplayCard(most_number[0][0]))
 			return
 		elif most_number[0][1]==3:
 			print('Three of a kind' ,DisplayCard(most_number[0][0]))
