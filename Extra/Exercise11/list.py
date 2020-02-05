@@ -10,13 +10,16 @@ from ast import literal_eval
 
 data = [numbers.rstrip('\n') for numbers in open("testfile.txt","r")]
 print(data)
-given = input('Give the the 6 exercises you want to look for , as 12,11,10,14:'  ).split(',')
+given = input('Give the the 6 exercises you want to look for , as 12,11,10,14  :' ).split(',')
 search = [int(numbers) for numbers in given]
-search = search[0:4]
 
-
+i=4
 for numbers in data:
-    
-    if literal_eval(numbers)==search:
+    if literal_eval(numbers)==search[0:4]:
         print('matched')
         break
+    else: 
+        search += [search.pop(i)]
+        if i>0 :i-=1
+        print(search)
+
