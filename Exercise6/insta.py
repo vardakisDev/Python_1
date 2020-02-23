@@ -10,8 +10,7 @@ profile = instaloader.Profile.from_username(L.context, user)
 
 data = []
 
-
-for post in islice(profile.get_posts(),20) :
+for post in islice(profile.get_posts(),100) :
     post_comments = post.get_comments()
     for comment in post_comments:
         data.append(comment.owner.username)
